@@ -27,7 +27,7 @@ install_nerves_bootstrap: &install_nerves_bootstrap
     name: Install nerves_bootstrap
     command: mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez --force
 
-version: 2.0
+version: 2
 
 jobs:
   build_system:
@@ -153,7 +153,7 @@ jobs:
           command: grep -Pazo "(?s)(?<=## ${CIRCLE_TAG})[^#]+" /nerves/deploy/system/CHANGELOG.md > /nerves/deploy/system/RELEASE_NOTES
       - run:
           name: Deploy artifacts to Github
-          command: ./ghr -draft -t $GITHUB_TOKEN -u nerves-project -r $CIRCLE_PROJECT_REPONAME -b "$(cat /nerves/deploy/system/RELEASE_NOTES)" -replace $CIRCLE_TAG /nerves/deploy/system/artifacts
+          command: ./ghr -draft -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME -b "$(cat /nerves/deploy/system/RELEASE_NOTES)" -replace $CIRCLE_TAG /nerves/deploy/system/artifacts
 
 workflows:
   version: 2
