@@ -1,12 +1,12 @@
 defmodule KioskSystemx8664.Mixfile do
   use Mix.Project
 
-  @app :kiosk_system_x86_64
+  @app :kiosk_system_amdgpu_x86_64
   @version Path.join(__DIR__, "VERSION")
     |> File.read!
     |> String.trim
-  
-  provider = 
+
+  provider =
     if System.get_env("CI") != nil do
       Nerves.Artifact.Providers.Local
     else
@@ -30,7 +30,7 @@ defmodule KioskSystemx8664.Mixfile do
   end
 
   def application do
-    [] 
+    []
   end
 
   defp bootstrap(args) do
@@ -42,9 +42,9 @@ defmodule KioskSystemx8664.Mixfile do
   defp nerves_package do
     [
       type: :system,
-      artifact_sites: [
-        {:github_releases, "letoteteam/#{@app}"}
-      ],
+      # artifact_sites: [
+      #   {:github_releases, "letoteteam/#{@app}"}
+      # ],
       provider: @provider,
       platform: Nerves.System.BR,
       platform_config: [
