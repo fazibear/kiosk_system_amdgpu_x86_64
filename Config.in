@@ -4,4 +4,3 @@
 # Nerves or Buildroot.
 source "$NERVES_DEFCONFIG_DIR/package/qt-webengine-kiosk/Config.in"
 source "$NERVES_DEFCONFIG_DIR/package/llvm/Config.in"
-source "$NERVES_DEFCONFIG_DIR/package/mesa4d/Config.in"

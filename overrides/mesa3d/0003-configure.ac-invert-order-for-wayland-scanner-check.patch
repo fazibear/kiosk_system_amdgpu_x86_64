@@ -64,7 +64,7 @@ index 9e09f80181..038a28fac9 100644
  #if __BYTE_ORDER == __LITTLE_ENDIAN
 --
 2.14.3
-nerves@hz1:~/kiosk_mesa4d/example$ cat ../package/mesa4d/0003-configure.ac-invert-order-for-wayland-scanner-check.patch
+nerves@hz1:~/kiosk_mesa3d/example$ cat ../package/mesa3d/0003-configure.ac-invert-order-for-wayland-scanner-check.patch
 
 m 11a759c33160db6e887e7640071ba84482e6164f Mon Sep 17 00:00:00 2001
 From: Gustavo Zacarias <gustavo@zacarias.com.ar>
@@ -109,20 +109,20 @@ index ee03d6f582..786b7214b9 100644
  PKG_CHECK_EXISTS([wayland-protocols >= $WAYLAND_PROTOCOLS_REQUIRED], [have_wayland_protocols=yes], [have_wayland_protocols=no])
 --
 2.14.3
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$
-nerves@hz1:~/kiosk_mesa4d/example$ cat ../package/mesa4d/0003-configure.ac-invert-order-for-wayland-scanner-check.patch
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$
+nerves@hz1:~/kiosk_mesa3d/example$ cat ../package/mesa3d/0003-configure.ac-invert-order-for-wayland-scanner-check.patch
 
 m 11a759c33160db6e887e7640071ba84482e6164f Mon Sep 17 00:00:00 2001
 From: Gustavo Zacarias <gustavo@zacarias.com.ar>
