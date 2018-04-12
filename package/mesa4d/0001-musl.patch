@@ -10,9 +10,8 @@ Signed-off-by: Bernd Kuhls <bernd.kuhls@t-online.de>
 @@ -34,7 +34,7 @@
  #ifndef VMW_SCREEN_H_
  #define VMW_SCREEN_H_
- 
+
 -
 +#include <sys/stat.h>
  #include "pipe/p_compiler.h"
- #include "pipe/p_state.h"
- 
+ #include "pipe/p_state.h"<Paste>

@@ -5,7 +5,7 @@
 ################################################################################
 
 # When updating the version, please also update mesa4d-headers
-MESA4D_VERSION = 18.0.0
+MESA4D_VERSION = 17.3.6
 MESA4D_SOURCE = mesa-$(MESA4D_VERSION).tar.xz
 MESA4D_SITE = https://mesa.freedesktop.org/archive
 	MESA4D_LICENSE = MIT, SGI, Khronos
