@@ -8,13 +8,13 @@ defmodule Example.Application do
     iface = Application.get_env(:nerves_network, :iface)
     init0()
     # Comment if you need to wait for an IP before launching
-    init1(%{})
+    # init1(%{})
     # Define workers and child supervisors to be supervised
     children = [
       # Uncomment if you need to wait for IP
-      # worker(SystemRegistry.Task, [
-      #   [:state, :network_interface,  iface, :ipv4_address],
-      #   &init1/1])
+      worker(SystemRegistry.Task, [
+        [:state, :network_interface,  iface, :ipv4_address],
+        &init1/1])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
