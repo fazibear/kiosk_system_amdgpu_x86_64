@@ -42,12 +42,12 @@ index 46689637f9..508edfd0d5 100644
 --- a/src/amd/Makefile.addrlib.am
 +++ b/src/amd/Makefile.addrlib.am
 @@ -30,6 +30,7 @@ addrlib_libamdgpu_addrlib_la_CPPFLAGS = \
-  -I$(srcdir)/addrlib/inc/chip/r800 \
-  -I$(srcdir)/addrlib/gfx9/chip \
-  -I$(srcdir)/addrlib/r800/chip \
-+ $(DEFINES) \
-  -DBRAHMA_BUILD=1
-
+ 	-I$(srcdir)/addrlib/inc/chip/r800 \
+ 	-I$(srcdir)/addrlib/gfx9/chip \
+ 	-I$(srcdir)/addrlib/r800/chip \
++	$(DEFINES) \
+ 	-DBRAHMA_BUILD=1
+ 
  addrlib_libamdgpu_addrlib_la_CXXFLAGS = \
 diff --git a/src/util/u_endian.h b/src/util/u_endian.h
 index 9e09f80181..038a28fac9 100644
@@ -56,11 +56,12 @@ index 9e09f80181..038a28fac9 100644
 @@ -27,7 +27,7 @@
  #ifndef U_ENDIAN_H
  #define U_ENDIAN_H
-
+ 
 -#if defined(__GLIBC__) || defined(ANDROID) || defined(__CYGWIN__)
 +#if defined(__GLIBC__) || defined(ANDROID) || defined(__CYGWIN__) || defined(HAVE_ENDIAN_H)
  #include <endian.h>
-
+ 
  #if __BYTE_ORDER == __LITTLE_ENDIAN
---
+-- 
 2.14.3
+
