@@ -68,11 +68,14 @@ defmodule Example.Application do
     # Need to spawn to make sure we don't block
     # Otherwise, SystemRegistry will continue to send messages
     # and run out of memory.
-    if pid =  Process.whereis(QtWebEngineKiosk) do
-      Process.exit(pid, :normal)
-    end
-    spawn(fn -> MuonTrap.cmd("qt-webengine-kiosk", ["-c", "/etc/qt-webengine-kiosk.ini", "--opengl", "NATIVE"]) end)
-    |> Process.register(QtWebEngineKiosk)
+    # if pid =  Process.whereis(QtWebEngineKiosk) do
+    #   Process.exit(pid, :normal)
+    # end
+  end
+
+  def kiosk(m) do
+    spawn(fn -> MuonTrap.cmd("qt-webengine-kiosk", ["--monitor", "#{m}", "-c", "/etc/qt-webengine-kiosk.ini", "--opengl", "NATIVE"], into: IO.stream(:stdio, :line), stderr_to_stdout: true) end)
+    #|> Process.register(QtWebEngineKiosk)
   end
 
   def init_ntp(ntp_server) do
