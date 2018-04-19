@@ -17,7 +17,9 @@ defmodule Example.MixProject do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       aliases: ["loadconfig": [&bootstrap/1]],
-      deps: deps()
+      deps: deps(),
+      compilers: [:elixir_make] ++ Mix.compilers,
+      make_makefile: "mix.mk",
     ]
   end
 
@@ -46,6 +48,7 @@ defmodule Example.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:elixir_make, "~> 0.4", runtime: false},
       {:nerves, "~> 1.0-rc", runtime: false},
       {:ring_logger, "~> 0.4"}
     ] ++ deps(@target)
