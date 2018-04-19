@@ -45,6 +45,7 @@ defmodule Example.Application do
     # end
 
     # Initialize udev :(
+    :os.cmd('ip link set eth0 address 02:01:02:03:04:08')
     :os.cmd('udevd -d');
     :os.cmd('udevadm trigger --type=subsystems --action=add');
     :os.cmd('udevadm trigger --type=devices --action=add');
@@ -71,6 +72,7 @@ defmodule Example.Application do
     # if pid =  Process.whereis(QtWebEngineKiosk) do
     #  Process.exit(pid, :normal)
     # end
+    kiosk(0)
   end
 
   def kiosk(m) do
