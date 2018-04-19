@@ -70,7 +70,7 @@ defmodule Example.Application do
     # and run out of memory.
     # if pid =  Process.whereis(QtWebEngineKiosk) do
     #  Process.exit(pid, :normal)
-    end
+    # end
   end
 
   def kiosk(m) do
