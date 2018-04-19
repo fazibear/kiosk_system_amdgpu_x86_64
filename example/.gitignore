@@ -18,4 +18,5 @@ erl_crash.dump
 
 /priv
 /src/Makefile*
+Makefile
 .qmake*
