@@ -69,13 +69,17 @@ defmodule Example.Application do
     # Otherwise, SystemRegistry will continue to send messages
     # and run out of memory.
     # if pid =  Process.whereis(QtWebEngineKiosk) do
-    #   Process.exit(pid, :normal)
-    # end
+    #  Process.exit(pid, :normal)
+    end
   end
 
   def kiosk(m) do
-    spawn(fn -> MuonTrap.cmd("qt-webengine-kiosk", ["--monitor", "#{m}", "-c", "/etc/qt-webengine-kiosk.ini", "--opengl", "NATIVE"], into: IO.stream(:stdio, :line), stderr_to_stdout: true) end)
+    spawn(fn -> MuonTrap.cmd(kiosk_path(), ["--monitor", "#{m}", "-c", "/etc/qt-webengine-kiosk.ini", "--opengl", "NATIVE"], into: IO.stream(:stdio, :line), stderr_to_stdout: true) end)
     #|> Process.register(QtWebEngineKiosk)
+  end
+
+  def kiosk_path do
+    Application.app_dir(:example, "priv/qt-webengine-kiosk")
   end
 
   def init_ntp(ntp_server) do
