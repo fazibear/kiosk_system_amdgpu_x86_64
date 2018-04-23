@@ -10,7 +10,7 @@
 #include <QWebEngineView>
 #include <QMainWindow>
 
-class MainWindow :public QMainWindow
+class MainWindow :public QWindow
 {
     Q_OBJECT
 
