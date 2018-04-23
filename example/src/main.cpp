@@ -41,9 +41,9 @@ int main(int argc, char * argv[])
 {
     qDebug() << "Start!!!!";
 
-
     qputenv("QT_LOGGING_RULES", "qt.qpa.*=true");
     qputenv("QSG_INFO", "1");
+    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
 
     QStringList qargv;
     for (int i=0; i<argc; i++) {
@@ -96,7 +96,8 @@ int main(int argc, char * argv[])
         qDebug() << "using automatic gl";
         break;
     }
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_Use96Dpi);
+    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
     parser.process(app);
