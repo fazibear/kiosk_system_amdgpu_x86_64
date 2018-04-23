@@ -9,6 +9,28 @@
 
 #include "mainwindow.h"
 
+static QWebEngineView *addView(QScreen *screen, int screenIdx, QUrl url)
+{
+	QWebEngineView *view = new QWebEngineView();
+
+	view->setUrl(url);
+
+	qDebug() << "x:" << screen->geometry().x();
+	qDebug() << "y:" << screen->geometry().y();
+	qDebug() << "h:" << screen->geometry().width();
+	qDebug() << "w:" << screen->geometry().height();
+
+	view->setGeometry(
+			screen->geometry().x(),
+			screen->geometry().y(),
+			screen->geometry().width(),
+			screen->geometry().height()
+			);
+
+	return view;
+}
+
+
 int main(int argc, char **argv)
 {
  qputenv("QT_LOGGING_RULES", "qt.qpa.*=true");
@@ -26,30 +48,10 @@ urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
 
  QVector<QWebEngineView *> views;
  for (int i = 0; i < screens.count(); ++i) {
-	 QWebEngineView *view = new QWebEngineView();
-
-	 view->setUrl(urls[i]);
-	 qDebug() << "x:" << screens[i]->geometry().x(),
-	 qDebug() << "y:" << screens[i]->geometry().y(),
-	 qDebug() << "h:" << screens[i]->geometry().width(),
-	 qDebug() << "w:" << screens[i]->geometry().height(),
-
-	 view->setGeometry(
-			 0,
-			 screens[i]->geometry().y(),
-			 screens[i]->geometry().width(),
-			 screens[i]->geometry().height()
-			 );
-	 view->show();
-	 //view->showFullScreen();
-
-	 // QMainWindow *view = new QMainWindow;
-	 // view->windowHandle()->setScreen(screens[i]);
-	 // view->showMaximized();
-
-	 //QWebEngineView *web = new QWebEngineView();
-
-	 views.append(view);
+	 QWebEngineView *v = addView(screens[i], i, urls[i]);
+	 views.append(v);
+	 v->showFullScreen();
+	 qDebug() << "XXX:" << v->geometry().x();
  }
 
  int r = app.exec();
