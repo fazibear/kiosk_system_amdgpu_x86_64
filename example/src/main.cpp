@@ -30,8 +30,7 @@ urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
 	 QWebEngineView *view = new QWebEngineView();
 
 	 view->setUrl(urls[i]);
-	 view->showFullScreen();
-
+	 view->show();
 	 view->windowHandle()->setScreen(screens[i]);
 	 views.append(view);
  }
