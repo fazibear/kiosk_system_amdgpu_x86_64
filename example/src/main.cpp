@@ -30,7 +30,7 @@ static QWebEngineView *addView(QScreen *screen, int screenIdx, QUrl url)
 			screen->geometry().height()
 			);
 
-	view->showFullScreen();
+	view->show();
 
 	qDebug() << "VIE:" << view;
 	return view;
