@@ -1,5 +1,5 @@
 {
-  "device": "amdgpu",
+  "device": "/dev/dri/card0",
   "outputs": [
     {
       "name": "DP1",
