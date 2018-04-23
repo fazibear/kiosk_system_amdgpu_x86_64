@@ -20,12 +20,17 @@ static QWebEngineView *addView(QScreen *screen, int screenIdx, QUrl url)
 	qDebug() << "h:" << screen->geometry().width();
 	qDebug() << "w:" << screen->geometry().height();
 
+	view->show();
+	view->windowHandle()->setScreen(screen);
+
 	view->setGeometry(
 			screen->geometry().x(),
 			screen->geometry().y(),
 			screen->geometry().width(),
 			screen->geometry().height()
 			);
+
+	view->showFullScreen();
 
 	qDebug() << "VIE:" << view;
 	return view;
@@ -51,8 +56,6 @@ urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
  for (int i = 0; i < screens.count(); ++i) {
 	 QWebEngineView *v = addView(screens[i], i, urls[i]);
 	 views.append(v);
-	 v->show();
-	 v->windowHandle()->setScreen(screens[i]);
 	 qDebug() << "XXX:" << v << v->geometry().x();
  }
 
