@@ -24,15 +24,18 @@ int main(int argc, char **argv)
 urls.append(QUrl(QStringLiteral("https://www.wp.pl")));
 urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
 
- QVector<QWindow *> views;
+ QVector<QWebEngineView *> views;
  for (int i = 0; i < screens.count(); ++i) {
-	 // QWebEngineView *view = new QWebEngineView();
-         //
-	 // view->setUrl(urls[i]);
+	 QWebEngineView *view = new QWebEngineView();
+
+	 view->setUrl(urls[i]);
+	 view->show();
+	 view->windowHandle()->setScreen(screens[i]);
+	 view->showFullScreen();
+
+	 // QMainWindow *view = new QMainWindow;
 	 // view->windowHandle()->setScreen(screens[i]);
-	 QWindow *view = new QWindow;
-	 view->setScreen(screens[i]);
-	 view->showMaximized();
+	 // view->showMaximized();
 
 	 //QWebEngineView *web = new QWebEngineView();
 

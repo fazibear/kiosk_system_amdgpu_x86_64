@@ -1,9 +1,12 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow() : QWindow(){
+MainWindow::MainWindow() : QMainWindow(){
     view = new QWebEngineView;
     view->setUrl(QUrl(QStringLiteral("https://www.wp.pl")));
-//    setCentralWidget(view);
+
+//     QBoxLayout *layout = new QBoxLayout(this);
+
+    //    setCentralWidget(view);
 }
 
 MainWindow::~MainWindow(){
