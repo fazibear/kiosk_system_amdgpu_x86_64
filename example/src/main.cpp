@@ -33,7 +33,6 @@ urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
 	 view->showFullScreen();
 
 	 view->windowHandle()->setScreen(screens[i]);
-	 view->windowHandle()->setX(0);
 	 views.append(view);
  }
 
