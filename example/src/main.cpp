@@ -4,50 +4,42 @@
 #include <QQmlContext>
 #include <QScreen>
 #include <QDebug>
+#include <QWebEngineView>
+#include <QApplication>
 
-static QQuickView *addView(QScreen *screen, int screenIdx)
-{
-    qDebug("Creating new QQuickView for screen %p", screen);
-    QQuickView *v = new QQuickView;
-
-    v->setScreen(screen);
-    v->setResizeMode(QQuickView::SizeRootObjectToView);
-
-    v->rootContext()->setContextProperty("screenIdx", screenIdx);
-    v->rootContext()->setContextProperty("screenGeom", screen->geometry());
-    v->rootContext()->setContextProperty("screenAvailGeom", screen->availableGeometry());
-    v->rootContext()->setContextProperty("screenVirtGeom", screen->virtualGeometry());
-    v->rootContext()->setContextProperty("screenAvailVirtGeom", screen->availableVirtualGeometry());
-    v->rootContext()->setContextProperty("screenPhysSizeMm", screen->physicalSize());
-    v->rootContext()->setContextProperty("screenRefresh", screen->refreshRate());
-
-    v->setSource(QUrl("qrc:/screen.qml"));
-
-    QObject::connect(v->engine(), &QQmlEngine::quit, qGuiApp, &QCoreApplication::quit);
-
-    return v;
-}
+#include "mainwindow.h"
 
 int main(int argc, char **argv)
 {
-    qputenv("QT_LOGGING_RULES", "qt.qpa.*=true");
-    qputenv("QSG_INFO", "1");
+ qputenv("QT_LOGGING_RULES", "qt.qpa.*=true");
+ qputenv("QSG_INFO", "1");
 
-    QGuiApplication app(argc, argv);
+ QApplication app(argc, argv);
 
-    QList<QScreen *> screens = app.screens();
-    qDebug("Application sees %d screens", screens.count());
-    qDebug() << screens;
+ QList<QScreen *> screens = app.screens();
+ qDebug("Application sees %d screens", screens.count());
+ qDebug() << screens;
 
-    QVector<QQuickView *> views;
-    for (int i = 0; i < screens.count(); ++i) {
-        QQuickView *v = addView(screens[i], i);
-        views.append(v);
-        v->showFullScreen();
-    }
+ QVector<QUrl> urls;
+urls.append(QUrl(QStringLiteral("https://www.wp.pl")));
+urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
 
-    int r = app.exec();
+ QVector<QWebEngineView *> views;
+ for (int i = 0; i < screens.count(); ++i) {
 
-    qDeleteAll(views);
-    return r;
+	 QWebEngineView *view = new QWebEngineView();
+
+	 view->setUrl(urls[i]);
+	 view->show();
+	 view->windowHandle()->setScreen(screens[i]);
+	 view->windowHandle()->setX(0);
+	 views.append(view);
+
+	 view->showNormal();
+ }
+
+ int r = app.exec();
+
+ qDeleteAll(views);
+ return r;
 }

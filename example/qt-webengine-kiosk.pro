@@ -1,8 +1,9 @@
 TEMPLATE = app
 
-QT += quick
+QT += quick webenginewidgets
 
-SOURCES = src/main.cpp
+SOURCES = src/main.cpp src/mainwindow.cpp
+HEADERS = src/mainwindow.h
 RESOURCES = src/quickmwtest.qrc
 OTHER_FILES = src/screen.qml
 
