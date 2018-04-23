@@ -1,0 +1,13 @@
+{
+  "device": "amdgpu",
+  "outputs": [
+    {
+      "name": "DP1",
+      "virtualIndex": 0
+    },
+    {
+      "name": "DP2",
+      "virtualIndex": 1
+    }
+  ]
+}
