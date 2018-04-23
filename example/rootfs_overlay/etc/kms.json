@@ -3,11 +3,12 @@
   "outputs": [
     {
       "name": "DP1",
-      "virtualIndex": 0
+      "virtualIndex": 0,
+      "primary": true
     },
     {
       "name": "DP2",
-      "virtualIndex": 1
+      "virtualPos": "1920, 0"
     }
   ]
 }

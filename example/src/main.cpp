@@ -63,12 +63,12 @@ int main(int argc, char **argv)
 //
 
 	QWebEngineView *view1 = new QWebEngineView();
-	view1->setUrl(QUrl(QStringLiteral("https://www.wp.pl")));
+	//view1->setUrl(QUrl(QStringLiteral("https://www.wp.pl")));
 	view1->setGeometry(0, 0, 1920, 1080);
 	view1->show();
 
 	QWebEngineView *view2 = new QWebEngineView();
-	view2->setUrl(QUrl(QStringLiteral("https://www.onet.pl")));
+	//view2->setUrl(QUrl(QStringLiteral("https://www.onet.pl")));
 	view2->setGeometry(1920, 0, 1920, 1080);
 	view2->show();
 
