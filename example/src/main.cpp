@@ -30,7 +30,7 @@ urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
 
 	 view->setUrl(urls[i]);
 	 view->setGeometry(
-			 screens[i]->geometry().x(),
+			 i*1920,
 			 screens[i]->geometry().y(),
 			 screens[i]->geometry().width(),
 			 screens[i]->geometry().height()
