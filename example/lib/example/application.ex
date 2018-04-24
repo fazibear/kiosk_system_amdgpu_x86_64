@@ -4,6 +4,7 @@ defmodule Example.Application do
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
+    set_mac()
     import Supervisor.Spec, warn: false
     iface = Application.get_env(:nerves_network, :iface)
     init0()
@@ -21,6 +22,11 @@ defmodule Example.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Example.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  def set_mac do
+    :os.cmd('ip link set eth0 address 02:01:02:03:04:08')
+    Process.sleep(5000)
   end
 
   def init0 do
@@ -45,12 +51,10 @@ defmodule Example.Application do
     # end
 
     # Initialize udev :(
-    :os.cmd('ip link set eth0 address 02:01:02:03:04:08')
     :os.cmd('udevd -d');
     :os.cmd('udevadm trigger --type=subsystems --action=add');
     :os.cmd('udevadm trigger --type=devices --action=add');
     :os.cmd('udevadm settle --timeout=30');
-
   end
 
   def init1(_delta) do
