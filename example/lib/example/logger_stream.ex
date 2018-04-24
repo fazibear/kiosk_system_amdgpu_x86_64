@@ -12,8 +12,10 @@ defmodule LoggerStream do
 
     def log(stream, level) do
       fn
-        :ok, {:cont, x} ->
-          Logger.bare_log(level, fn -> String.trim(x) end)
+        :ok, {:cont, logs} ->
+          logs
+          |> String.split("\n")
+          |> Enum.each(&Logger.bare_log(level, fn -> &1 end))
         :ok, _ -> stream
       end
     end
