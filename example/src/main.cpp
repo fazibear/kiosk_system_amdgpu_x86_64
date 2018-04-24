@@ -7,20 +7,17 @@
 
 static QQuickView *addView(QScreen *screen, int screenIdx)
 {
+
+ QVector<QUrl> urls;
+ urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
+ urls.append(QUrl(QStringLiteral("https://www.wp.pl")));
+
     qDebug("Creating new QQuickView for screen %p", screen);
     QQuickView *v = new QQuickView;
 
     v->setScreen(screen);
     v->setResizeMode(QQuickView::SizeRootObjectToView);
-
-    v->rootContext()->setContextProperty("screenIdx", screenIdx);
-    v->rootContext()->setContextProperty("screenGeom", screen->geometry());
-    v->rootContext()->setContextProperty("screenAvailGeom", screen->availableGeometry());
-    v->rootContext()->setContextProperty("screenVirtGeom", screen->virtualGeometry());
-    v->rootContext()->setContextProperty("screenAvailVirtGeom", screen->availableVirtualGeometry());
-    v->rootContext()->setContextProperty("screenPhysSizeMm", screen->physicalSize());
-    v->rootContext()->setContextProperty("screenRefresh", screen->refreshRate());
-
+    v->rootContext()->setContextProperty("location", urls[screenIdx]);
     v->setSource(QUrl("qrc:/screen.qml"));
 
     QObject::connect(v->engine(), &QQmlEngine::quit, qGuiApp, &QCoreApplication::quit);
@@ -43,7 +40,9 @@ int main(int argc, char **argv)
     for (int i = 0; i < screens.count(); ++i) {
         QQuickView *v = addView(screens[i], i);
         views.append(v);
-        v->showFullScreen();
+        // v->showFullScreen();
+	v->setGeometry(0,0, 200,200);
+	v->showNormal();
     }
 
     int r = app.exec();
