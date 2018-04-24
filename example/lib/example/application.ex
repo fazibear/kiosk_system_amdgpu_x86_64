@@ -76,7 +76,7 @@ defmodule Example.Application do
   end
 
   def kiosk(m) do
-    spawn(fn -> MuonTrap.cmd(kiosk_path(), ["--monitor", "#{m}", "-c", "/etc/qt-webengine-kiosk.ini", "--opengl", "NATIVE"], into: IO.stream(:stdio, :line), stderr_to_stdout: true) end)
+    spawn(fn -> MuonTrap.cmd(kiosk_path(), ["--monitor", "#{m}", "-c", "/etc/qt-webengine-kiosk.ini", "--opengl", "NATIVE"], into: LoggerStream.new(:info), stderr_to_stdout: true) end)
     #|> Process.register(QtWebEngineKiosk)
   end
 

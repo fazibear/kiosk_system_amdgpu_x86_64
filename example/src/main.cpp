@@ -4,78 +4,50 @@
 #include <QQmlContext>
 #include <QScreen>
 #include <QDebug>
-#include <QWebEngineView>
-#include <QApplication>
 
-#include "mainwindow.h"
+static QQuickView *addView(QScreen *screen, int screenIdx)
+{
+    qDebug("Creating new QQuickView for screen %p", screen);
+    QQuickView *v = new QQuickView;
 
-// static QWebEngineView *addView(QScreen *screen, int screenIdx, QUrl url)
-// {
-//	QWebEngineView *view = new QWebEngineView();
-//
-//	view->setUrl(url);
-//
-//	qDebug() << "x:" << screen->geometry().x();
-//	qDebug() << "y:" << screen->geometry().y();
-//	qDebug() << "h:" << screen->geometry().width();
-//	qDebug() << "w:" << screen->geometry().height();
-//
-//	view->show();
-//	view->windowHandle()->setScreen(screen);
-//
-//	view->setGeometry(
-//			screen->geometry().x(),
-//			screen->geometry().y(),
-//			screen->geometry().width(),
-//			screen->geometry().height()
-//			);
-//
-//	view->show();
-//
-//	qDebug() << "VIE:" << view;
-//	return view;
-// }
-//
+    v->setScreen(screen);
+    v->setResizeMode(QQuickView::SizeRootObjectToView);
+
+    v->rootContext()->setContextProperty("screenIdx", screenIdx);
+    v->rootContext()->setContextProperty("screenGeom", screen->geometry());
+    v->rootContext()->setContextProperty("screenAvailGeom", screen->availableGeometry());
+    v->rootContext()->setContextProperty("screenVirtGeom", screen->virtualGeometry());
+    v->rootContext()->setContextProperty("screenAvailVirtGeom", screen->availableVirtualGeometry());
+    v->rootContext()->setContextProperty("screenPhysSizeMm", screen->physicalSize());
+    v->rootContext()->setContextProperty("screenRefresh", screen->refreshRate());
+
+    v->setSource(QUrl("qrc:/screen.qml"));
+
+    QObject::connect(v->engine(), &QQmlEngine::quit, qGuiApp, &QCoreApplication::quit);
+
+    return v;
+}
 
 int main(int argc, char **argv)
 {
- qputenv("QT_LOGGING_RULES", "qt.qpa.*=true");
- qputenv("QSG_INFO", "1");
- qputenv("QSG_INFO", "1");
- qputenv("QT_QPA_EGLFS_KMS_CONFIG", "/etc/kms.json");
+    qputenv("QT_LOGGING_RULES", "qt.qpa.*=true");
+    qputenv("QSG_INFO", "1");
 
- QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
- QList<QScreen *> screens = app.screens();
- qDebug("Application sees %d screens", screens.count());
- qDebug() << screens;
+    QList<QScreen *> screens = app.screens();
+    qDebug("Application sees %d screens", screens.count());
+    qDebug() << screens;
 
-//  QVector<QUrl> urls;
-// urls.append(QUrl(QStringLiteral("https://www.wp.pl")));
-// urls.append(QUrl(QStringLiteral("https://www.onet.pl")));
+    QVector<QQuickView *> views;
+    for (int i = 0; i < screens.count(); ++i) {
+        QQuickView *v = addView(screens[i], i);
+        views.append(v);
+        v->showFullScreen();
+    }
 
-//  QVector<QWebEngineView *> views;
-//  for (int i = 0; i < screens.count(); ++i) {
-//	 QWebEngineView *v = addView(screens[i], i, urls[i]);
-//	 views.append(v);
-//	 qDebug() << "XXX:" << v << v->geometry().x();
-//  }
-//
+    int r = app.exec();
 
-	QWebEngineView *view1 = new QWebEngineView();
-	//view1->setUrl(QUrl(QStringLiteral("https://www.wp.pl")));
-	view1->setGeometry(0, 0, 1920, 1080);
-	view1->show();
-
-	QWebEngineView *view2 = new QWebEngineView();
-	//view2->setUrl(QUrl(QStringLiteral("https://www.onet.pl")));
-	view2->setGeometry(1920, 0, 1920, 1080);
-	view2->show();
-
-
-
-int r = app.exec();
-
- //qDeleteAll(views);
- return r;
+    qDeleteAll(views);
+    return r;
 }
