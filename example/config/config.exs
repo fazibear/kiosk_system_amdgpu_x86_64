@@ -28,7 +28,7 @@ config :nerves, :firmware,
 config :logger, backends: [RingLogger]
 
 # Set the number of messages to hold in the circular buffer
-config :logger, RingLogger, buffer_size: 100
+config :logger, RingLogger, buffer_size: 1000
 
 network_ssid = System.get_env("NERVES_NETWORK_SSID")
 network_psk = System.get_env("NERVES_NETWORK_PSK")
