@@ -26,7 +26,6 @@ defmodule Example.Application do
 
   def set_mac do
     :os.cmd('ip link set eth0 address 02:01:02:03:04:08')
-    Process.sleep(5000)
   end
 
   def init0 do
